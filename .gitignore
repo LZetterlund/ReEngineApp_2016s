@@ -8,5 +8,10 @@ Z_DELETE/
 # Visual Studio specifics
 *.suo
 *.db
+<<<<<<< HEAD
 *.opendb
 *.sdf
+=======
+tr.exe.stackdump
+Solution_VS15.sdf
+>>>>>>> bbf3363a3dca26ac1d3e76d5d825d68c898dbe88
