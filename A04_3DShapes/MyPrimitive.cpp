@@ -30,6 +30,13 @@ void MyPrimitive::AddQuad(vector3 a_vBottomLeft, vector3 a_vBottomRight, vector3
 	AddVertexPosition(a_vBottomRight);
 	AddVertexPosition(a_vTopRight);
 }
+
+void MyPrimitive::AddTri(vector3 a_vBottomLeft, vector3 a_vBottomRight, vector3 a_vTop)
+{
+	AddVertexPosition(a_vBottomLeft);
+	AddVertexPosition(a_vBottomRight);
+	AddVertexPosition(a_vTop);
+}
 void MyPrimitive::GeneratePlane(float a_fSize, vector3 a_v3Color)
 {
 	if (a_fSize < 0.01f)
@@ -114,12 +121,26 @@ void MyPrimitive::GenerateCone(float a_fRadius, float a_fHeight, int a_nSubdivis
 	//3--2
 	//|  |
 	//0--1
-	vector3 point0(-fValue, -fValue, fValue); //0
-	vector3 point1(fValue, -fValue, fValue); //1
-	vector3 point2(fValue, fValue, fValue); //2
-	vector3 point3(-fValue, fValue, fValue); //3
+	std::vector<vector3> point;
+	point.push_back(vector3(0.0f));
+	float theta = 0;
+	float steps = 2 * PI / static_cast<float>(a_nSubdivisions);
+	for (int i = 0; i < a_nSubdivisions; i++) {
+		point.push_back(vector3(cos(theta),
+			sin(theta), 0.0f));
+		theta += steps;
+	}
+	for (int i = 0; i < a_nSubdivisions; ++i) {
+		AddTri(point[0], point[i], point[i + 1]);
+	}
+	AddTri(point[a_nSubdivisions], point[1], point[0]);
 
-	AddQuad(point0, point1, point3, point2);
+	//vector3 point0(-fValue, -fValue, fValue); //0
+	//vector3 point1(fValue, -fValue, fValue); //1
+	//vector3 point2(fValue, fValue, fValue); //2
+	//vector3 point3(-fValue, fValue, fValue); //3
+
+	//AddQuad(point0, point1, point3, point2);
 
 	//Your code ends here
 	CompileObject(a_v3Color);
