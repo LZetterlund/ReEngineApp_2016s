@@ -37,6 +37,11 @@ void AppClass::Update(void)
 
 #pragma region Your Code goes here
 	m_pMeshMngr->SetModelMatrix(IDENTITY_M4, "WallEye");
+
+	std::vector<vector3> positions;
+	positions.push_back(vector3(1.0f, 3.0f, -5.0f));
+	positions.push_back(vector3(5.0f, 2.0f, -5.0f));
+	positions.push_back(vector3(0.0f, 2.0f, -5.0f));
 #pragma endregion
 
 #pragma region Does not need changes but feel free to change anything here
@@ -62,6 +67,12 @@ void AppClass::Display(void)
 	m_pMeshMngr->Render(); //renders the render list
 	m_pMeshMngr->ClearRenderList(); //Reset the Render list after render
 	m_pGLSystem->GLSwapBuffers(); //Swaps the OpenGL buffers
+}
+
+template <class T>
+static T MapValue(T valueToMap, T originalScale_min, T originalScale_max, T mappedScale_min, T mappedScale_max)
+{
+	return (valueToMap - originalScale_min) * (mappedScale_max - mappedScale_min) / (originalScale_max - originalScale_min) + mappedScale_min;
 }
 
 void AppClass::Release(void)

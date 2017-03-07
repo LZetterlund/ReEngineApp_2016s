@@ -67,6 +67,13 @@ public:
 	ARGUMENTS: ---
 	OUTPUT: ---
 	*/
+	template <class T>
+	static T MapValue(T valueToMap, T originalScale_min, T originalScale_max, T mappedScale_min, T mappedScale_max);
+	/*
+	USAGE: Maps values
+	ARGUMENTS: ---
+	OUTPUT: ---
+	*/
 	virtual void Display(void) final;
 	/*
 	USAGE: Manage the response of key presses
