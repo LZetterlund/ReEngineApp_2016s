@@ -53,6 +53,9 @@ void AppClass::Update(void)
 
 	//Print info on the screen
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
+
+	float timer = 0;
+	m_pMeshMngr->PrintLine("Time is: " + std::to_string(timer), vector3(.2, 1, .6));
 	m_pMeshMngr->Print("FPS:");
 	m_pMeshMngr->Print(std::to_string(nFPS), RERED);
 #pragma endregion
