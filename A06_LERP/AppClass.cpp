@@ -52,6 +52,7 @@ void AppClass::Update(void)
 	int nFPS = m_pSystem->GetFPS();
 
 	//Print info on the screen
+	m_pMeshMngr->PrintLine("");
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
 
 	float timer = 0;

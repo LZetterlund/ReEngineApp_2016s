@@ -11,15 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-<<<<<<< HEAD:E07_Lerp/E07_Lerp.vcxproj
-    <ProjectGuid>{616921F6-149D-45D6-9F0A-BA32A1AFED29}</ProjectGuid>
-    <RootNamespace>00_Sandbox</RootNamespace>
-    <ProjectName>E07_Lerp</ProjectName>
-=======
-    <ProjectGuid>{F2B4B292-2881-40EA-A091-57D14FB1AE05}</ProjectGuid>
-    <RootNamespace>E07_LERP</RootNamespace>
-    <ProjectName>E07s_LERP</ProjectName>
->>>>>>> d8eda33aa6d12cbf7e14147db00d4a8e46d8a8a7:E07s_LERP/E07s_LERP.vcxproj
+    <ProjectGuid>{731BEF6C-42D8-41D5-9C26-FCC908241B92}</ProjectGuid>
+    <RootNamespace>A05s_Transformations</RootNamespace>
+    <ProjectName>A05s_Transformations_DEMO</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -111,16 +105,16 @@ xcopy "$(SolutionDir)include\RE\Shaders" "$(SolutionDir)_Binary\Shaders" /y</Com
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AppClass.cpp" />
-    <ClCompile Include="AppClassControls.cpp" />
-    <ClCompile Include="Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\res\Resource.h" />
     <ClInclude Include="AppClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\res\BTO.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AppClass.cpp" />
+    <ClCompile Include="AppClassControls.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
