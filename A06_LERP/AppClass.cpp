@@ -36,8 +36,15 @@ void AppClass::Update(void)
 #pragma endregion
 
 #pragma region Your Code goes here
-	//m_pMeshMngr->SetModelMatrix(IDENTITY_M4, "WallEye");
+	//Use the clock... "Luke"
+	static DWORD startTimeSystem = GetTickCount();
+	DWORD timeApplication = GetTickCount() - startTimeSystem;
+	float timer = timeApplication / 1000.0f;
+	m_pMeshMngr->PrintLine("Time is: " + std::to_string(timer));
+	timer += 0.1f;
 
+	//could be done more effeciently, but this works fine
+	int numOfPositions = 11;
 	std::vector<vector3> positions;
 	positions.push_back(vector3(-4.0f, -2.0f, 5.0f));
 	positions.push_back(vector3(1.0f, -2.0f, 5.0f));
@@ -50,6 +57,31 @@ void AppClass::Update(void)
 	positions.push_back(vector3(0.0f, 2.0f, -5.0f));
 	positions.push_back(vector3(5.0f, 2.0f, -5.0f));
 	positions.push_back(vector3(1.0f, 3.0f, -5.0f));
+
+	//temperoarilt using 11 just because
+	for (int i = 0; i < numOfPositions; i++) {
+		matrix4 positionMatrix = glm::translate(positions[i]) * glm::scale(vector3(0.1f));
+		m_pMeshMngr->AddSphereToRenderList(positionMatrix, RERED, WIRE | SOLID);
+	}
+	//3 seconds from point to point modulus the number of points gives the index of the next point to be used
+	int currentPos = static_cast<int>(std::floor(timer)) / 3 % numOfPositions;
+	//this number is used to be mapped as the max value against the timer in the MapValue function
+	float currentMaxTimer = (static_cast<float>(currentPos)+1) * 3;
+
+	//fmod 33.0f because if it takes 3 seconds to get from point to point, once we reach the eleventh point that number should act like 0 again
+	float timerMapped = MapValue(std::fmodf(timer, 33.0f), currentMaxTimer-3, currentMaxTimer, 0.0f, 1.0f);
+	matrix4 m4WallEye;
+	vector3 v3lerp;
+	//v3lerp = positions[currentPos];
+	if (currentPos == 0) {
+		v3lerp = glm::lerp(positions[numOfPositions - 1], positions[0], timerMapped);
+	}
+	else {
+		v3lerp = glm::lerp(positions[currentPos-1], positions[currentPos], timerMapped);
+	}
+	m4WallEye = glm::translate(v3lerp);
+	m_pMeshMngr->SetModelMatrix(m4WallEye, "WallEye");
+
 #pragma endregion
 
 #pragma region Does not need changes but feel free to change anything here
@@ -62,25 +94,6 @@ void AppClass::Update(void)
 	//Print info on the screen
 	m_pMeshMngr->PrintLine("");
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
-
-	//Use the clock... "Luke"
-	static DWORD startTimeSystem = GetTickCount();
-	DWORD timeApplication = GetTickCount() - startTimeSystem;
-	float timer = timeApplication/1000.0f;
-	m_pMeshMngr->PrintLine("Time is: " + std::to_string(timer));
-	timer += 0.1f;
-
-	matrix4 m4WallEye;
-	float timerMapped = MapValue(timer, 0.0f, 5.0f, 0.0f, 1.0f);
-	vector3 v3lerp = glm::lerp(vector3(0), vector3(1,0,0), timerMapped);
-	m4WallEye = glm::translate(v3lerp);
-	m_pMeshMngr->SetModelMatrix(m4WallEye, "WallEye");
-
-	//make a matrix DEMO
-	matrix4 m4Sphere1;
-	m4Sphere1 = glm::translate(vector3(1.5, 0, 0)) * glm::scale(vector3(0.1f));
-	m_pMeshMngr->AddSphereToRenderList(glm::translate(vector3(1.5, 0, 0)), RERED, WIRE | SOLID);
-
 	m_pMeshMngr->Print("FPS:");
 	m_pMeshMngr->Print(std::to_string(nFPS), RERED);
 #pragma endregion
