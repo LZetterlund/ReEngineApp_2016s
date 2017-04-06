@@ -1,21 +1,10 @@
-/*----------------------------------------------
-Programmer: Alberto Bobadilla (labigm@gmail.com)
-Date: 2015/09
-----------------------------------------------*/
-#ifndef __APPLICATION_H_
-#define __APPLICATION_H_
+#ifndef __VIEWER_H_
+#define __VIEWER_H_
 
 #include "RE\ReEngAppClass.h"
-#include <SFML\Graphics.hpp>
-//#include <chrono>
 
-using namespace ReEng; //Using ReEng namespace to use all the classes in the dll
-
-class AppClass : public ReEngAppClass
+class Viewer
 {
-	PrimitiveClass* m_pCone = nullptr;
-	PrimitiveClass* m_pCylinder = nullptr;
-
 	//CAMERA STUFF
 	vector3 m_v3Position = vector3(0.0f, 0.0f, 5.0f);
 	vector3 m_v3Target = vector3(0.0f, 0.0f, 0.0f);
@@ -30,72 +19,37 @@ class AppClass : public ReEngAppClass
 	matrix4 m_m4Projection = matrix4(1.0f);
 	matrix4 m_m4View = matrix4(1.0f);
 	//end camera stuff
+
 public:
-	typedef ReEngAppClass super;
-
-	/* Constructor */
-	AppClass(HINSTANCE hInstance, LPWSTR lpCmdLine, int nCmdShow) : super(hInstance, lpCmdLine, nCmdShow) {}
-
 	/*
-	InitWindow
-	Initialize ReEng variables necessary to create the window
+	MyPrimitive
+	USAGE: Constructor
+	ARGUMENTS: ---
+	OUTPUT: class object
 	*/
-	virtual void InitWindow(String a_sWindowName);
-
+	Viewer();
+	/* Copy Constructor */
 	/*
-	InitVariables
-	Initializes user specific variables, this is executed right after InitApplicationVariables,
-	the purpose of this member function is to initialize member variables specific for this lesson
+	USAGE:
+	ARGUMENTS:
+	OUTPUT:
 	*/
-	virtual void InitVariables(void);
-
+	Viewer(const Viewer& other);
+	/* Copy Assignment Operator */
 	/*
-	Update
-	Updates the scene
+	USAGE:
+	ARGUMENTS:
+	OUTPUT:
 	*/
-	virtual void Update(void);
+	virtual Viewer& operator=(const Viewer& other);
 
+	/* Destructor */
 	/*
-	Display
-	Displays the scene
-	*/
-	virtual void Display(void);
-
-	/*
-	ProcessKeyboard
-	Manage the response of key presses
-	*/
-	virtual void ProcessKeyboard(void);
-
-
-	/*
-	USAGE: Manage the response of mouse position and clicks
+	USAGE:
 	ARGUMENTS: ---
 	OUTPUT: ---
 	*/
-	virtual void ProcessMouse(void);
-
-	/*
-	Release
-	Releases the application
-	IF INHERITED AND OVERRIDEN MAKE SURE TO RELEASE BASE POINTERS (OR CALL BASED CLASS RELEASE)
-	*/
-	virtual void Release(void);
-
-	/*
-	USAGE: Reads the configuration of the application to a file
-	ARGUMENTS: ---
-	OUTPUT: ---
-	*/
-	virtual void ReadConfig(void) final {}
-
-	/*
-	USAGE: Writes the configuration of the application to a file
-	ARGUMENTS: ---
-	OUTPUT: ---
-	*/
-	virtual void WriteConfig(void) final {}
-
+	~Viewer(void);
 
 	/*
 	USAGE: Gets the View matrix from the camera
@@ -168,5 +122,4 @@ public:
 	*/
 	void ChangeRoll(float a_fDegree);
 };
-
-#endif //__APPLICATION_H_
+#endif //__VIEWER_H_

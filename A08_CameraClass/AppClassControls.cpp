@@ -20,31 +20,31 @@ void AppClass::ProcessKeyboard(void)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		//m_pCameraMngr->MoveForward(fSpeed);
-		AppClass::MoveForward(-fSpeed);
+		m_pCamera->MoveForward(-fSpeed);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		//m_pCameraMngr->MoveForward(-fSpeed);
-		AppClass::MoveForward(fSpeed);
+		m_pCamera->MoveForward(fSpeed);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		//m_pCameraMngr->MoveSideways(-fSpeed);
-		AppClass::MoveSideways(fSpeed);
+		m_pCamera->MoveSideways(fSpeed);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		//m_pCameraMngr->MoveSideways(fSpeed);
-		AppClass::MoveSideways(-fSpeed);
+		m_pCamera->MoveSideways(-fSpeed);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 		//m_pCameraMngr->MoveVertical(-fSpeed);
-		AppClass::MoveVertical(-fSpeed);
+		m_pCamera->MoveVertical(-fSpeed);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 		//m_pCameraMngr->MoveVertical(fSpeed);
-		AppClass::MoveVertical(fSpeed);
+		m_pCamera->MoveVertical(fSpeed);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 		//m_pCameraMngr->MoveVertical(fSpeed);
-		AppClass::SetPosition(vector3(0.0f,0.0f,0.0f));
+		m_pCamera->SetPosition(vector3(0.0f,0.0f,0.0f));
 
 	//Exit the program
 #pragma region Other Actions
@@ -98,8 +98,8 @@ void AppClass::ProcessMouse(void)
 		//Change the Yaw and the Pitch of the camera
 		//m_pCameraMngr->ChangeYaw(fAngleY * 3.0f);
 		//m_pCameraMngr->ChangePitch(-fAngleX * 3.0f);
-		AppClass::ChangeYaw(fAngleY * 3.0f);
-		AppClass::ChangePitch(-fAngleX * 3.0f);
+		m_pCamera->ChangeYaw(fAngleY * 3.0f);
+		m_pCamera->ChangePitch(-fAngleX * 3.0f);
 		SetCursorPos(CenterX, CenterY);//Position the mouse in the center
 	}
 }
