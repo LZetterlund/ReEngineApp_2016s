@@ -16,6 +16,26 @@ void AppClass::Update(void)
 #pragma endregion
 #pragma region YOUR CODE GOES HERE
 	m_m4Steve = glm::mat4(1.0f); // same as m_m4Steve = IDENTITY_M4; setting the identity to steve
+
+	float value5 = fmodf(static_cast<float>(dTotalTime), 5.0f);
+
+	float value10 = fmodf(static_cast<float>(dTotalTime), 10.0f);
+
+	if (value10 > 5) {
+		value10 = 5 - value5;
+	}
+
+	float mappedValue = MapValue(value5, 0.0f, 5.0f, 90.0f, 450.0f);
+
+	//float transValue = MapValue(value5, 0.0f, 10.0f, 0.0f, 5.0f);
+
+	matrix4 steveOrbit = glm::rotate(IDENTITY_M4, mappedValue, vector3(0, 0, 1.0f));
+
+	matrix4 rotateZ = glm::rotate(IDENTITY_M4, -90.0f, vector3(0.0f, 0.0f, 1.0f));
+
+	matrix4 steveDistance = glm::translate(vector3(value10, 0, 0));
+
+	m_m4Steve = steveOrbit * steveDistance * rotateZ;
 #pragma endregion
 #pragma region DOES NOT NEED CHANGES
 	//Set the model matrix
