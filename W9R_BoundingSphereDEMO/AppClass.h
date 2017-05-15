@@ -15,9 +15,14 @@ using namespace ReEng; //Using ReEng namespace to use all the classes in the dll
 class AppClass : public ReEngAppClass
 {
 	vector3 m_v3Position;
+<<<<<<< HEAD
 	MyBoundingBoxClass* m_pBS0;
 	MyBoundingBoxClass* m_pBS1;
 	MyBoundingBoxClass* m_pBS2;
+=======
+	MyBoundingSphereClass* m_pBS0;
+	MyBoundingSphereClass* m_pBS1;
+>>>>>>> 504adab55218d2c1dec440b0ab640fca225843da
 public:
 	typedef ReEngAppClass super;
 	/*

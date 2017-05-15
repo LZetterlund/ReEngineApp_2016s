@@ -14,6 +14,7 @@ void AppClass::InitVariables(void)
 	//Load a model onto the Mesh manager
 	m_pMeshMngr->LoadModel("Minecraft\\Zombie.obj", "Zombie");
 	m_pMeshMngr->LoadModel("Minecraft\\Steve.obj", "Steve");
+<<<<<<< HEAD
 	m_pMeshMngr->LoadModel("Minecraft\\Cow.obj", "Cow");
 	//creating bounding spheres for both models
 	m_pBS0 = new MyBoundingBoxClass(m_pMeshMngr->GetVertexList("Zombie"));
@@ -25,6 +26,14 @@ void AppClass::InitVariables(void)
 
 	matrix4 m4Position2 = glm::translate(vector3(2.5, 2.0, 0.0));
 	m_pMeshMngr->SetModelMatrix(m4Position2, "Cow");
+=======
+	//creating bounding speheres for both models
+	m_pBS0 = new MyBoundingSphereClass(m_pMeshMngr->GetVertexList("Zombie"));
+	m_pBS1 = new MyBoundingSphereClass(m_pMeshMngr->GetVertexList("Steve"));
+
+	matrix4 m4Position = glm::translate(vector3(3.0, 0.0, 0.0));
+	m_pMeshMngr->SetModelMatrix(m4Position, "Steve");
+>>>>>>> 504adab55218d2c1dec440b0ab640fca225843da
 }
 
 void AppClass::Update(void)
@@ -87,8 +96,35 @@ void AppClass::Update(void)
 		m_pBS2->SetColliding(true);
 	}
 
+<<<<<<< HEAD
 	if (fPercentage > 1.0f)
 	{
+=======
+	static float fTimer = 0.0f;
+	static int nClock = m_pSystem->GenClock();
+	float fDeltaTime = m_pSystem->LapClock(nClock);
+	fTimer += fDeltaTime;
+	vector3 v3Start = vector3(3.0, 0.0, 0.0);
+	vector3 v3End = vector3(5.0, 0.0, 0.0);
+	float fPercentage = MapValue(fTimer, 0.0f, 3.0f, 0.0f, 1.0f);
+	vector3 v3Current = glm::lerp(v3Start, v3End, fPercentage);
+	matrix4 mTranslation = glm::translate(v3Current);
+
+	m_pMeshMngr->SetModelMatrix(mTranslation, "Steve");
+	m_pBS1->SetModelMatrix(m_pMeshMngr->GetModelMatrix("Steve")); // gets the matrix from the system, then sets it to the model
+	m_pBS1->RenderSphere();
+
+	if (m_pBS0->IsColliding(m_pBS1)) {
+		m_pBS0->m_bColliding = true;
+		m_pBS1->m_bColliding = true;
+	}
+	else {
+		m_pBS0->m_bColliding = false;
+		m_pBS1->m_bColliding = false;
+	}
+
+	if (fPercentage > 1.0f) {
+>>>>>>> 504adab55218d2c1dec440b0ab640fca225843da
 		fTimer = 0.0f;
 		std::swap(v3Start, v3End);
 	}

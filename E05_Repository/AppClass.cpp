@@ -55,7 +55,11 @@ void AppClass::Update(void)
 <<<<<<< HEAD:E05_Repository/AppClass.cpp
 =======
 	m_pMeshMngr->PrintLine("");//Add a line on top
+<<<<<<< HEAD
 >>>>>>> a48377b41bd2d7dcae27d5daaf94d6f2b1107393:E07s_LERP/AppClass.cpp
+=======
+>>>>>>> 3a599dd642348e48a93f58a5cdd8a50114af0a2c:E07s_LERP/AppClass.cpp
+>>>>>>> 504adab55218d2c1dec440b0ab640fca225843da
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
 
 	m_pMeshMngr->Print("Selection: ");
